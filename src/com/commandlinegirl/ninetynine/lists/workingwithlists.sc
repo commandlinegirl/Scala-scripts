@@ -4,7 +4,7 @@ import scala.util.Random
 def last[A](xs: List[A]): A = xs match {
   case Nil => throw new IllegalArgumentException("Empty list")
   case h :: Nil => h
-  case h :: t => last(t)
+  case _ :: t => last(t)
 }
 assert (last(List(1, 1, 2, 3, 5, 8)) == 8)
 
@@ -31,7 +31,7 @@ assert (getElement(List(1, 2), 0) == 1)
 
 /* 4. Find the number of elements of a list. */
 def length[A](xs: List[A]): Int =
-  xs.foldRight(0)((_, acc) => acc + 1)
+  xs.foldLeft(0)((acc, _) => acc + 1)
 
 /* 5. Reverse a list. */
 def reverse[A](xs: List[A]): List[A] = xs match {
@@ -192,4 +192,5 @@ assert(randomSelect(3, List('a, 'b, 'c, 'd, 'f, 'g, 'h)).length == 3)
 def lotto(n: Int, m: Int): List[Int] = {
   randomSelect(n, (1 to m).toList)
 }
+
 
